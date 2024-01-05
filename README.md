@@ -1,4 +1,4 @@
-<h3 align="center"><img src="https://d3g9hyrd06lga2.cloudfront.net/wp-content/uploads/2023/07/cropped-ntq-favicon-192x192.png" height="64"><br>MTQ Coder extension</h3>
+<h3 align="center"><img src="https://d3g9hyrd06lga2.cloudfront.net/wp-content/uploads/2023/07/cropped-ntq-favicon-192x192.png" height="64"><br>An dev assistant - NTQ Coder extension</h3>
 <p align="center">
     <a href="https://marketplace.visualstudio.com/items?itemName=NTQSolution.ntqcoder" alt="Marketplace version">
         <img src="https://img.shields.io/visual-studio-marketplace/v/NTQSolution.ntqcoder?color=orange&label=VS%20Code" />
