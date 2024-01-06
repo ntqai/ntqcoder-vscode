@@ -1,8 +1,8 @@
 {
   "name": "ntqcoder",
-  "displayName": "NTQCoder: write and improve code using AI",
-  "description": "Use NTQCoder inside the IDE to enhance and automate your coding with AI-powered assistance",
-  "version": "1.0",
+  "displayName": "NTQCoder: A Developer's Trusted Assistant",
+  "description": "Your coding companion, streamlining development with smart suggestions and reliable assistance. A developer's trusted assistant for efficient coding workflows.",
+  "version": "1.0.0",
   "publisher": "NTQSolution",
   "icon": "resources/extensionIcon.png",
   "license": "NTQ LICENSE",
@@ -13,7 +13,8 @@
     "vscode": "^1.73.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages",
+    "Machine Learning"
   ],
   "keywords": [
     "ntqcoder",
@@ -76,42 +77,41 @@
         "title": "Retry NTQCoder request"
       }
     ],
+    "submenus":[
+      {
+        "id" : "ntqcoderId",
+        "label" : "NTQCoder"
+      }
+    ],
     "menus": {
       "editor/context": [
         {
-          "command": "ntqcoder.ask",
-          "when": "editorTextFocus",
+          "submenu": "ntqcoderId",
+          "when": "editorHasSelection",
           "group": "ntqcoder-menu-group@1"
+        }
+      ],
+      "ntqcoderId":[
+        {
+          "command": "ntqcoder.ask"
         },
         {
-          "command": "ntqcoder.genunittest",
-          "when": "editorTextFocus",
-          "group": "ntqcoder-menu-group@2"
+          "command": "ntqcoder.genunittest"
         },
         {
-          "command": "ntqcoder.explain",
-          "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@3"
+          "command": "ntqcoder.explain"
         },
         {
-          "command": "ntqcoder.refactor",
-          "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@4"
+          "command": "ntqcoder.refactor"
         },
         {
-          "command": "ntqcoder.findProblems",
-          "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@5"
+          "command": "ntqcoder.findProblems"
         },
         {
-          "command": "ntqcoder.optimize",
-          "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@6"
+          "command": "ntqcoder.optimize"
         },
         {
-          "command": "ntqcoder.documentation",
-          "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@7"
+          "command": "ntqcoder.documentation"
         }
       ],
       "commandPalette": [
@@ -183,10 +183,10 @@
         "ntqcoder.model": {
           "type": "string",
           "enum": [
-            "deepseek-coder"
+            "ntq-coder"
           ],
-          "default": "deepseek-coder",
-          "description": "Which GPT model to use",
+          "default": "ntq-coder",
+          "description": "Which code model to use",
           "order": 1
         },
         "ntqcoder.pasteOnClick": {

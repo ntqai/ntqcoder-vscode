@@ -155,6 +155,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 			this._chatGPTAPI = new ChatGPTAPI({
 				apiKey: this._authInfo.apiKey || "xx",
 				apiBaseUrl: this._settings.apiUrl,
+				systemMessage: "You are an AI programming assistant, utilizing the NTQ Coder model, developed by NTQ Solution Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer.",
 				completionParams: { model:this._settings.model || "gpt-3.5-turbo" },
 			});
 			// console.log( this._chatGPTAPI );
@@ -289,7 +290,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 							this._view.webview.postMessage({ type: 'addResponse', value: response });
 						}
 					},
-					timeoutMs: (this._settings.timeoutLength || 60) * 1000,
+					timeoutMs: 0,
 					...this._conversation
 				});
 
