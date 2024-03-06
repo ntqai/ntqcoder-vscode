@@ -1,13 +1,13 @@
 {
-  "name": "ntqcoder",
-  "displayName": "NTQCoder: A Developer's Trusted Assistant",
+  "name": "nxdev",
+  "displayName": "NxDev: A Developer's Trusted Assistant",
   "description": "Your coding companion, streamlining development with smart suggestions and reliable assistance. A developer's trusted assistant for efficient coding workflows.",
-  "version": "1.0.0",
-  "publisher": "NTQSolution",
+  "version": "2.0.3",
+  "publisher": "NTQ-Solution",
   "icon": "resources/extensionIcon.png",
   "license": "NTQ LICENSE",
   "repository": {
-    "url": "https://github.com/ntqai/ntqcoder-vscode"
+    "url": "https://github.com/ntqai"
   },
   "engines": {
     "vscode": "^1.73.0"
@@ -17,7 +17,7 @@
     "Machine Learning"
   ],
   "keywords": [
-    "ntqcoder",
+    "nxdev",
     "openai",
     "gpt3",
     "gpt4",
@@ -29,158 +29,171 @@
     "refactor"
   ],
   "activationEvents": [
-    "onView:ntqcoder.chatView",
-    "onCommand:ntqcoder.ask",
-    "onCommand:ntqcoder.explain",
-    "onCommand:ntqcoder.refactor",
-    "onCommand:ntqcoder.optimize",
-    "onCommand:ntqcoder.findProblems",
-    "onCommand:ntqcoder.documentation"
+    "onView:nxdev.chatView",
+    "onCommand:nxdev.ask",
+    "onCommand:nxdev.explain",
+    "onCommand:nxdev.complete",
+    "onCommand:nxdev.genunittest",
+    "onCommand:nxdev.refactor",
+    "onCommand:nxdev.optimize",
+    "onCommand:nxdev.findProblems",
+    "onCommand:nxdev.documentation"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "ntqcoder.ask",
-        "title": "Ask NTQCoder"
+        "command": "nxdev.ask",
+        "title": "Ask NxDev"
       },
       {
-        "command": "ntqcoder.genunittest",
-        "title": "NTQCoder: Generate unit test"
+        "command": "nxdev.genunittest",
+        "title": "NxDev: Generate unit test"
       },
       {
-        "command": "ntqcoder.explain",
-        "title": "NTQCoder: Explain selection"
+        "command": "nxdev.explain",
+        "title": "NxDev: Explain selection"
       },
       {
-        "command": "ntqcoder.refactor",
-        "title": "NTQCoder: Refactor selection"
+        "command": "nxdev.complete",
+        "title": "NxDev: Complete selection"
       },
       {
-        "command": "ntqcoder.findProblems",
-        "title": "NTQCoder: Find problems"
+        "command": "nxdev.refactor",
+        "title": "NxDev: Refactor selection"
       },
       {
-        "command": "ntqcoder.optimize",
-        "title": "NTQCoder: Optimize selection"
+        "command": "nxdev.findProblems",
+        "title": "NxDev: Find problems"
       },
       {
-        "command": "ntqcoder.documentation",
-        "title": "NTQCoder: Write documentation"
+        "command": "nxdev.optimize",
+        "title": "NxDev: Optimize selection"
       },
       {
-        "command": "ntqcoder.resetConversation",
-        "title": "Reset NTQCoder conversation"
+        "command": "nxdev.documentation",
+        "title": "NxDev: Write documentation"
       },
       {
-        "command": "ntqcoder.tryAgain",
-        "title": "Retry NTQCoder request"
+        "command": "nxdev.resetConversation",
+        "title": "Reset NxDev conversation"
+      },
+      {
+        "command": "nxdev.tryAgain",
+        "title": "Retry NxDev request"
       }
     ],
     "submenus":[
       {
-        "id" : "ntqcoderId",
-        "label" : "NTQCoder"
+        "id" : "nxdevId",
+        "label" : "NxDev"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "submenu": "ntqcoderId",
+          "submenu": "nxdevId",
           "when": "editorHasSelection",
-          "group": "ntqcoder-menu-group@1"
+          "group": "nxdev-menu-group@1"
         }
       ],
-      "ntqcoderId":[
+      "nxdevId":[
         {
-          "command": "ntqcoder.ask"
+          "command": "nxdev.ask"
         },
         {
-          "command": "ntqcoder.genunittest"
+          "command": "nxdev.explain"
         },
         {
-          "command": "ntqcoder.explain"
+          "command": "nxdev.genunittest"
         },
         {
-          "command": "ntqcoder.refactor"
+          "command": "nxdev.complete"
         },
         {
-          "command": "ntqcoder.findProblems"
+          "command": "nxdev.refactor"
         },
         {
-          "command": "ntqcoder.optimize"
+          "command": "nxdev.findProblems"
         },
         {
-          "command": "ntqcoder.documentation"
+          "command": "nxdev.optimize"
+        },
+        {
+          "command": "nxdev.documentation"
         }
       ],
       "commandPalette": [
         {
-          "command": "ntqcoder.ask"
+          "command": "nxdev.ask"
         },
         {
-          "command": "ntqcoder.genunittest",
+          "command": "nxdev.explain",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.explain",
+          "command": "nxdev.complete",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.refactor",
+          "command": "nxdev.genunittest",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.findProblems",
+          "command": "nxdev.refactor",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.optimize",
+          "command": "nxdev.findProblems",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.documentation",
+          "command": "nxdev.optimize",
           "when": "editorHasSelection"
         },
         {
-          "command": "ntqcoder.resetConversation"
+          "command": "nxdev.documentation",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "nxdev.resetConversation"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "ntqcoder",
-          "title": "NTQCoder",
+          "id": "nxdev",
+          "title": "NxDev",
           "icon": "resources/icon.png"
         }
       ]
     },
     "views": {
-      "ntqcoder": [
+      "nxdev": [
         {
           "type": "webview",
-          "id": "ntqcoder.chatView",
-          "name": "NTQCoder"
+          "id": "nxdev.chatView",
+          "name": "NxDev"
         }
       ]
     },
     "configuration": {
-      "title": "NTQCoder",
+      "title": "NxDev",
       "type": "object",
       "properties": {
-        "ntqcoder.apiKey": {
+        "nxdev.apiKey": {
           "markdownDescription": "API key",
           "type": "string",
           "order": 0
         },
-        "ntqcoder.apiUrl": {
+        "nxdev.apiUrl": {
           "markdownDescription": "API URL",
           "type": "string",
-          "default": "https://api.ntq.ai/codentq/v1",
+          "default": "https://genapi.ntq.ai/v1",
           "order": 1
         },
-        "ntqcoder.model": {
+        "nxdev.model": {
           "type": "string",
           "enum": [
             "ntq-coder"
@@ -189,67 +202,73 @@
           "description": "Which code model to use",
           "order": 1
         },
-        "ntqcoder.pasteOnClick": {
+        "nxdev.pasteOnClick": {
           "type": "boolean",
           "default": true,
           "description": "Paste the code from a codeblock inside the response into the editor when you click on it",
           "order": 2
         },
-        "ntqcoder.promptPrefix.genunittest": {
+        "nxdev.promptPrefix.genunittest": {
           "type": "string",
           "default": "Generate a unit test for this code: ",
           "description": "The prompt prefix used for generating the unit test for the selected code",
           "order": 3
         },
-        "ntqcoder.promptPrefix.explain": {
+        "nxdev.promptPrefix.explain": {
           "type": "string",
           "default": "Explain what this code does: ",
           "description": "The prompt prefix used for explaining the selected code",
           "order": 3
         },
-        "ntqcoder.promptPrefix.refactor": {
+        "nxdev.promptPrefix.compelte": {
+          "type": "string",
+          "default": "Complete the code below: ",
+          "description": "The prompt prefix used for completing the selected code",
+          "order": 3
+        },
+        "nxdev.promptPrefix.refactor": {
           "type": "string",
           "default": "Refactor this code and explain what's changed: ",
           "description": "The prompt prefix used for refactoring the selected code",
           "order": 4
         },
-        "ntqcoder.promptPrefix.findProblems": {
+        "nxdev.promptPrefix.findProblems": {
           "type": "string",
           "default": "Find problems with the following code, fix them and explain what was wrong (Do not change anything else, if there are no problems say so): ",
           "description": "The prompt prefix used for finding problems in the selected code",
           "order": 5
         },
-        "ntqcoder.promptPrefix.documentation": {
+        "nxdev.promptPrefix.documentation": {
           "type": "string",
           "default": "Write documentation for the following code: ",
           "description": "The prompt prefix used for writing documentation for the selected code",
           "order": 7
         },
-        "ntqcoder.promptPrefix.optimize": {
+        "nxdev.promptPrefix.optimize": {
           "type": "string",
           "default": "Optimize the following code if there is anything to improve, if not say so: ",
           "description": "The prompt prefix used for optimizing the selected code",
           "order": 6
         },
-        "ntqcoder.keepConversation": {
+        "nxdev.keepConversation": {
           "type": "boolean",
           "default": true,
           "description": "Keep the conversation going by using the same conversation ID for all requests (allows follow-up questions)",
           "order": 8
         },
-        "ntqcoder.timeoutLength": {
+        "nxdev.timeoutLength": {
           "type": "number",
           "default": "120",
           "description": "How long should the request wait for a response before timing out (in seconds)",
           "order": 9
         },
-        "ntqcoder.selectedInsideCodeblock": {
+        "nxdev.selectedInsideCodeblock": {
           "type": "boolean",
           "default": true,
           "description": "Append selected code as a codeblock (```...code...```) instead of plain text",
           "order": 10
         },
-        "ntqcoder.codeblockWithLanguageId": {
+        "nxdev.codeblockWithLanguageId": {
           "type": "boolean",
           "default": true,
           "description": "Append language id of the selected code to the codeblock (```language...code...```)",

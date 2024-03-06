@@ -10,9 +10,9 @@ const BASE_URL = 'https://api.openai.com/v1';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('activating extension "ntqcoder"');
+	console.log('activating extension "nxdev"');
 	// Get the settings from the extension's configuration
-	const config = vscode.workspace.getConfiguration('ntqcoder');
+	const config = vscode.workspace.getConfiguration('nxdev');
 
 	// Create a new ChatGPTViewProvider instance and register it with the extension's context
 	const provider = new ChatGPTViewProvider(context.extensionUri);
@@ -40,53 +40,54 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	const commandHandler = (command:string) => {
-		const config = vscode.workspace.getConfiguration('ntqcoder');
+		const config = vscode.workspace.getConfiguration('nxdev');
 		const prompt = config.get(command) as string;
 		provider.search(prompt);
 	};
 
 	// Register the commands that can be called from the extension's package.json
 	context.subscriptions.push(
-		vscode.commands.registerCommand('ntqcoder.ask', () => 
+		vscode.commands.registerCommand('nxdev.ask', () => 
 			vscode.window.showInputBox({ prompt: 'What do you want to do?' })
 			.then((value) => provider.search(value))
 		),
-		vscode.commands.registerCommand('ntqcoder.genunittest', () => commandHandler('promptPrefix.genunittest')),
-		vscode.commands.registerCommand('ntqcoder.explain', () => commandHandler('promptPrefix.explain')),
-		vscode.commands.registerCommand('ntqcoder.refactor', () => commandHandler('promptPrefix.refactor')),
-		vscode.commands.registerCommand('ntqcoder.optimize', () => commandHandler('promptPrefix.optimize')),
-		vscode.commands.registerCommand('ntqcoder.findProblems', () => commandHandler('promptPrefix.findProblems')),
-		vscode.commands.registerCommand('ntqcoder.documentation', () => commandHandler('promptPrefix.documentation')),
-		vscode.commands.registerCommand('ntqcoder.resetConversation', () => provider.resetConversation())
+		vscode.commands.registerCommand('nxdev.genunittest', () => commandHandler('promptPrefix.genunittest')),
+		vscode.commands.registerCommand('nxdev.explain', () => commandHandler('promptPrefix.explain')),
+		vscode.commands.registerCommand('nxdev.complete', () => commandHandler('promptPrefix.complete')),
+		vscode.commands.registerCommand('nxdev.refactor', () => commandHandler('promptPrefix.refactor')),
+		vscode.commands.registerCommand('nxdev.optimize', () => commandHandler('promptPrefix.optimize')),
+		vscode.commands.registerCommand('nxdev.findProblems', () => commandHandler('promptPrefix.findProblems')),
+		vscode.commands.registerCommand('nxdev.documentation', () => commandHandler('promptPrefix.documentation')),
+		vscode.commands.registerCommand('nxdev.resetConversation', () => provider.resetConversation())
 	);
 
 
 	// Change the extension's session token or settings when configuration is changed
 	vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
-		if (event.affectsConfiguration('ntqcoder.apiKey')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		if (event.affectsConfiguration('nxdev.apiKey')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setAuthenticationInfo({apiKey: config.get('apiKey')});
-		}else if (event.affectsConfiguration('ntqcoder.apiUrl')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		}else if (event.affectsConfiguration('nxdev.apiUrl')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			let url = config.get('apiUrl')as string || BASE_URL;
 			provider.setSettings({ apiUrl: url });
-		} else if (event.affectsConfiguration('ntqcoder.model')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.model')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ model: config.get('model') || 'gpt-3.5-turbo' }); 
-		} else if (event.affectsConfiguration('ntqcoder.selectedInsideCodeblock')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.selectedInsideCodeblock')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ selectedInsideCodeblock: config.get('selectedInsideCodeblock') || false });
-		} else if (event.affectsConfiguration('ntqcoder.codeblockWithLanguageId')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.codeblockWithLanguageId')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ codeblockWithLanguageId: config.get('codeblockWithLanguageId') || false });
-		} else if (event.affectsConfiguration('ntqcoder.pasteOnClick')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.pasteOnClick')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ pasteOnClick: config.get('pasteOnClick') || false });
-		} else if (event.affectsConfiguration('ntqcoder.keepConversation')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.keepConversation')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ keepConversation: config.get('keepConversation') || false });
-		} else if (event.affectsConfiguration('ntqcoder.timeoutLength')) {
-			const config = vscode.workspace.getConfiguration('ntqcoder');
+		} else if (event.affectsConfiguration('nxdev.timeoutLength')) {
+			const config = vscode.workspace.getConfiguration('nxdev');
 			provider.setSettings({ timeoutLength: config.get('timeoutLength') || 60 });
 		}
 	});
@@ -97,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 class ChatGPTViewProvider implements vscode.WebviewViewProvider {
-	public static readonly viewType = 'ntqcoder.chatView';
+	public static readonly viewType = 'nxdev.chatView';
 	private _view?: vscode.WebviewView;
 
 	private _chatGPTAPI?: ChatGPTAPI;
@@ -156,7 +157,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 				apiKey: this._authInfo.apiKey || "xx",
 				apiBaseUrl: this._settings.apiUrl,
 				systemMessage: "You are an AI programming assistant, utilizing the NTQ Coder model, developed by NTQ Solution Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer.",
-				completionParams: { model:this._settings.model || "gpt-3.5-turbo" },
+				completionParams: { model:this._settings.model || "gpt-3.5-turbo", platform: 'VSCode'},
 			});
 			// console.log( this._chatGPTAPI );
 		}
@@ -231,7 +232,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 
 		// focus gpt activity from activity bar
 		if (!this._view) {
-			await vscode.commands.executeCommand('ntqcoder.chatView.focus');
+			await vscode.commands.executeCommand('nxdev.chatView.focus');
 		} else {
 			this._view?.show?.(true);
 		}
@@ -286,6 +287,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 						console.log("onProgress");
 						if (this._view && this._view.visible) {
 							response = partialResponse.text;
+							response = response.replace("<|EOT|>","");
 							this._response = response;
 							this._view.webview.postMessage({ type: 'addResponse', value: response });
 						}
@@ -297,9 +299,6 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 				if (this._currentMessageNumber !== currentMessageNumber) {
 					return;
 				}
-
-
-				console.log(res);
 
 				response = res.text;
 				if (res.detail?.usage?.total_tokens) {
@@ -317,6 +316,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 				if (this._currentMessageNumber === currentMessageNumber){
 					response = this._response;
 					response += `\n\n---\n[ERROR] ${e}`;
+					response = response.replace("ChatGPT","Server");
 				}
 			}
 		}
@@ -369,7 +369,7 @@ class ChatGPTViewProvider implements vscode.WebviewViewProvider {
 				</style>
 			</head>
 			<body>
-				<input class="h-10 w-full text-white bg-stone-700 p-4 text-sm" placeholder="Ask NTQCoder something" id="prompt-input" />
+				<input class="h-10 w-full text-white bg-stone-700 p-4 text-sm" placeholder="Ask NxDev something" id="prompt-input" />
 				
 				<div id="response" class="pt-4 text-sm">
 				</div>
